@@ -3,6 +3,7 @@ import './App.css';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import CardList from '../components/CardList';
+import Header from '../components/Header';
 
 interface Robot {
   id: number;
@@ -46,7 +47,7 @@ const App: React.FC = () => {
     <h1>Loading</h1>
   ) : (
     <div className='tc'>
-      <h1 className='f1'>RoboFriends</h1>
+      <Header />
       <SearchBox searchChange={onSearchChange} />
       <Scroll>
         <CardList robots={filteredRobots} />
