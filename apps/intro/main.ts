@@ -222,3 +222,67 @@ value21 = "Typescript";
 
 // import { sayHi } from "library";
 // sayHi("Typescript");
+
+// Generics
+// Generics are a way to create reusable components in TypeScript
+// Generics allow you to define a type with placeholders that can be filled in later
+
+// Example of a generic function
+
+const identity = <T>(value: T): T => value;
+
+const result1 = identity<number>(5);
+const result2 = identity<string>("Typescript");
+
+interface SumFunction <T> {
+  (a: T, b: T): T;
+}
+
+const sum2: SumFunction<number> = (a, b) => a + b;
+// console.log(sum2(1, 2)); // 3
+
+// More complex example of generics
+
+interface SetStorage<T> { 
+  setItem(key: string, value: T): void;
+  getItem(key: string): T | null;
+}
+
+interface SetStorage2<T> {  
+  setItem: (key: string, value: T) => void;
+  getItem: (key: string) => T | null;
+}
+
+class GenericNumber<T=number> {
+  value!: T;
+  add!: (x: T, y: T) => T; 
+}
+
+const genericNumber = new GenericNumber();
+genericNumber.value = 0;
+genericNumber.add = (x, y) => x + y; 
+
+const otherGenericOpition = new GenericNumber<string>();
+otherGenericOpition.value = "0";
+otherGenericOpition.add = (x, y) => x + y;
+
+// Another function example with Generics
+
+const removeDuplicates = <T>(array: T[]): T[] => {
+  return [...new Set(array)];
+}
+
+console.log(removeDuplicates([1, 2, 3, 1, 2, 3])); // [1, 2, 3]
+console.log(removeDuplicates(["a", "b", "c", "a", "b", "c"])); // ["a", "b", "c"]
+
+const removeDuplicates2 = <T>(array: T[]): T[] => {
+  return array.filter((value, index) => array.indexOf(value) === index);
+}
+
+console.log(removeDuplicates2([1, 2, 3, 1, 2, 3])); // [1, 2, 3]
+
+const removeDuplicates3 = <T>(array: T[]): T[] => {
+  return Array.from(new Set<T>(array));
+}
+
+console.log(removeDuplicates3([1, 2, 3, 1, 2, 3])); // [1, 2, 3]
